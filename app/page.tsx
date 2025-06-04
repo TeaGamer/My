@@ -11,6 +11,13 @@ const photos = [
   "/tear.png",
 ];
 
+// Ссылки на соцсети
+const socialLinks = [
+  { href: "https://github.com/TeaGamer", img: "/git.png", alt: "" },
+  { href: "https://twitter.com", img: "/twitter.png", alt: "Twitter" },
+  { href: "https://www.instagram.com/renat_abbasov1/", img: "/inst.png", alt: "" },
+];
+
 export default function Home() {
   const [index, setIndex] = useState(0);
 
@@ -26,7 +33,7 @@ export default function Home() {
     <>
       <style>{`
         .section {
-          height: 100vh; /* высота экрана */
+          height: 100vh;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -35,37 +42,65 @@ export default function Home() {
           gap: 1rem;
         }
         .first-section {
-          background:rgb(0, 0, 0);
+          background: black;
+          color: white;
         }
         .second-section {
-          background: #ddd;
+          background: white;
           color: black;
           padding: 2rem;
         }
-        img {
+        img.slider-photo {
           width: 400px;
           height: auto;
           border-radius: 8px;
+          cursor: default;
+        }
+        .social-links {
+          display: flex;
+          gap: 2rem;
+          margin-top: 1rem;
+        }
+        .social-links a img {
+          width: 60px;
+          height: 60px;
+          cursor: pointer;
+          transition: transform 0.3s ease;
+          border-radius: 50%;
+        }
+        .social-links a img:hover {
+          transform: scale(1.1);
         }
       `}</style>
 
       <main>
         {/* Первый экран */}
         <section className="section first-section">
-          <img src={photos[index]} alt="Фото" />
+          <img
+            src={photos[index]}
+            alt={`Фото ${index + 1}`}
+            className="slider-photo"
+          />
           <h1>Renat Abbasov</h1>
           <h2>123869</h2>
         </section>
 
         {/* Второй экран */}
         <section className="section second-section">
-          <h2>Мої соц.сети</h2>
-          <a href="https://github.com/TeaGamer" target="_blank" rel="noopener noreferrer">
-          <img src='/git.png' />
-          </a>
-
-          <p>https://github.com/TeaGamer</p>
-          <p>Он будет виден только после прокрутки вниз.</p>
+          <h2>Мои соцсети</h2>
+          <div className="social-links">
+            {socialLinks.map(({ href, img, alt }) => (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={alt}
+              >
+                <img src={img} alt={alt} />
+              </a>
+            ))}
+          </div>
         </section>
       </main>
     </>
