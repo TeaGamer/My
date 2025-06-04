@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const photos = [
   "/teaj.png",
@@ -11,7 +11,6 @@ const photos = [
   "/tear.png",
 ];
 
-// Ссылки на соцсети
 const socialLinks = [
   { href: "https://github.com/TeaGamer", img: "/git.png", alt: "GitHub" },
   { href: "https://www.instagram.com/renat_abbasov1/", img: "/inst.png", alt: "Instagram" },
@@ -19,19 +18,30 @@ const socialLinks = [
 
 export default function Home() {
   const [index, setIndex] = useState(0);
-  const [fade, setFade] = useState(true);
+  const [fade, setFade] = useState(true); // true — видимое фото, false — исчезает
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setFade(false); // Починаємо зникати
+    function startFadeCycle() {
+      // Начинаем исчезать
+      setFade(false);
 
-      setTimeout(() => {
-        setIndex((prevIndex) => (prevIndex + 1) % photos.length);
-        setFade(true); // Появляємось з новим фото
-      }, 500); // Тривалість зникання/появи
-    }, 5000); // Інтервал зміни фото
+      // Через 500мс меняем фото и запускаем появление
+      timeoutRef.current = setTimeout(() => {
+        setIndex((prev) => (prev + 1) % photos.length);
+        setFade(true);
 
-    return () => clearInterval(intervalId);
+        // Через 4500мс запускаем следующий цикл
+        timeoutRef.current = setTimeout(startFadeCycle, 4500);
+      }, 500);
+    }
+
+    // Запускаем первый цикл через 4500мс чтобы фото сначала показалось подольше
+    timeoutRef.current = setTimeout(startFadeCycle, 4500);
+
+    return () => {
+      clearTimeout(timeoutRef.current);
+    };
   }, []);
 
   function DownArrow() {
@@ -75,7 +85,7 @@ export default function Home() {
           height: 100vh;
           background: black;
           color: white;
-          padding-bottom: 150px; /* место для градиента */
+          padding-bottom: 150px;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -105,7 +115,7 @@ export default function Home() {
           flex-direction: column;
           text-align: center;
           gap: 1rem;
-          margin-top: -150px; /* чтобы секция подтянулась под градиент */
+          margin-top: -150px;
         }
         img.slider-photo {
           width: 400px;
@@ -135,7 +145,7 @@ export default function Home() {
         }
         .down-arrow {
           position: absolute;
-          bottom: 10px;       /* чуть отступ снизу */
+          bottom: 10px;
           left: 50%;
           transform: translateX(-50%);
           width: 40px;
@@ -143,7 +153,7 @@ export default function Home() {
           cursor: pointer;
           opacity: 0.7;
           transition: opacity 0.3s ease;
-          z-index: 1000;        /* поверх всего */
+          z-index: 1000;
         }
         .down-arrow:hover {
           opacity: 1;
@@ -151,7 +161,6 @@ export default function Home() {
       `}</style>
 
       <main>
-        {/* Первый экран */}
         <section className="section first-section">
           <img
             src={photos[index]}
@@ -160,11 +169,9 @@ export default function Home() {
           />
           <h1>Renat Abbasov</h1>
           <h2>123869</h2>
-
           <DownArrow />
         </section>
 
-        {/* Второй экран */}
         <section className="section second-section">
           <h2>Мои соцсети</h2>
           <div className="social-links">
