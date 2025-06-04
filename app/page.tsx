@@ -14,7 +14,6 @@ const photos = [
 // Ссылки на соцсети
 const socialLinks = [
   { href: "https://github.com/TeaGamer", img: "/git.png", alt: "" },
-  { href: "https://twitter.com", img: "/twitter.png", alt: "Twitter" },
   { href: "https://www.instagram.com/renat_abbasov1/", img: "/inst.png", alt: "" },
 ];
 
@@ -99,6 +98,7 @@ export default function Home() {
               >
                 <img src={img} alt={alt} />
               </a>
+              
             ))}
           </div>
         </section>
