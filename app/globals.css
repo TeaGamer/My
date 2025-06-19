@@ -73,6 +73,7 @@ section {
   text-align: center;
   gap: 1rem;
   margin-top: -150px;
+  scroll-margin-top: 100px;
 }
 
 img.slider-photo {
@@ -121,4 +122,27 @@ img.fade-out {
 
 .down-arrow:hover {
   opacity: 1;
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  will-change: opacity, transform;
+}
+
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.scroll-reveal-text {
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.word {
+  display: inline-block;
 }

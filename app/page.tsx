@@ -1,6 +1,6 @@
 "use client";
 
-
+import { ScrollRevealText } from './components/ScrollRevealText';
 import { useState, useEffect, useCallback } from "react";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
@@ -91,7 +91,7 @@ export default function Home() {
     };
 
     return (
-      <svg
+      <svg 
         className="down-arrow"
         fill="none"
         viewBox="0 0 24 24"
@@ -110,7 +110,7 @@ export default function Home() {
     <>
 
       <main>
-        {/* Первый экран */}
+        {/* Перший экран */}
         <section className="section first-section" style={{ position: "relative", overflow: "hidden" }}>
           <Particles
             id="tsparticles"
@@ -139,23 +139,25 @@ export default function Home() {
           <DownArrow />
         </section>
 
-        {/* Второй экран */}
-        <section className="section second-section">
-          <h2>Мои соцсети</h2>
-          <div className="social-links">
-            {socialLinks.map(({ href, img, alt }) => (
-              <a
-                key={href}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={alt}
-              >
-                <img src={img} alt={alt} />
-              </a>
-            ))}
-          </div>
-        </section>
+        {/* Другий экран */}
+  <section className="section second-section">
+    <ScrollRevealText>  
+    <h2>Мої соцмережі</h2>
+    <div className="social-links">
+      {socialLinks.map(({ href, img, alt }) => (
+        <a
+          key={href}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={alt}
+        >
+          <img src={img} alt={alt} />
+        </a>
+      ))}
+    </div>
+    </ScrollRevealText>
+  </section>
       </main>
     </>
   );
