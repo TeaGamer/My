@@ -24,14 +24,14 @@ export const ScrollRevealText = ({ children }: ScrollRevealTextProps) => {
     observer.observe(el);
 
     return () => {
-      if (el) observer.unobserve(el);
+      observer.disconnect();
     };
   }, []);
 
   return (
     <div
       ref={ref}
-      className={`scroll-reveal${isVisible ? ' visible' : ''}`}
+      className={`scroll-reveal ${isVisible ? 'visible' : ''}`}
     >
       {children}
     </div>
