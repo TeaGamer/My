@@ -1,12 +1,13 @@
 'use client';
-import { useRef, useEffect, useState, ReactNode } from 'react';
 
-type Props = {
+import { useRef, useEffect, useState, type ReactNode } from 'react';
+
+interface ScrollRevealTextProps {
   children: ReactNode;
-};
+}
 
-export const ScrollRevealText = ({ children }: Props) => {
-  const ref = useRef<HTMLDivElement>(null);
+export const ScrollRevealText = ({ children }: ScrollRevealTextProps) => {
+  const ref = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -15,7 +16,7 @@ export const ScrollRevealText = ({ children }: Props) => {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting); 
+        setIsVisible(entry.isIntersecting);
       },
       { threshold: 0.2 }
     );
@@ -28,7 +29,10 @@ export const ScrollRevealText = ({ children }: Props) => {
   }, []);
 
   return (
-    <div ref={ref} className={`scroll-reveal ${isVisible ? 'visible' : ''}`}>
+    <div
+      ref={ref}
+      className={`scroll-reveal${isVisible ? ' visible' : ''}`}
+    >
       {children}
     </div>
   );

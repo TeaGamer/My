@@ -63,7 +63,6 @@ const socialLinks = [
 
 export default function Home() {
   const particlesInit = useCallback(async (engine: Engine) => {  // <-- тип Engine здесь
-    await loadFull(engine);
   }, []);
 
   const [index, setIndex] = useState(0);
