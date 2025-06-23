@@ -2,49 +2,6 @@
 
 import { ScrollRevealText } from './components/ScrollRevealText';
 import { useState, useEffect, useCallback } from "react";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
-import type { Engine } from "tsparticles-engine";  // <-- импорт типа Engine
-
-
-const particlesOptions = {
-  fpsLimit: 60,
-  interactivity: {
-    events: {
-      onClick: { enable: true, mode: "push" },
-      onHover: { enable: true, mode: "repulse" },
-      resize: true,
-    },
-    modes: {
-      push: { quantity: 4 },
-      repulse: { distance: 100, duration: 0.4 },
-    },
-  },
-  particles: {
-    color: { value: "#ffffff" },
-    links: {
-      color: "#ffffff",
-      distance: 150,
-      enable: true,
-      opacity: 0.5,
-      width: 1,
-    },
-    collisions: { enable: false },
-    move: {
-      directions: "none",
-      enable: true,
-      outModes: "bounce",
-      random: false,
-      speed: 2,
-      straight: false,
-    },
-    number: { density: { enable: true, area: 800 }, value: 50 },
-    opacity: { value: 0.5 },
-    shape: { type: "circle" },
-    size: { value: { min: 1, max: 3 } },
-  },
-  detectRetina: true,
-};
 
 const photos = [
   "/teaj.png",
@@ -62,8 +19,6 @@ const socialLinks = [
 ];
 
 export default function Home() {
-  const particlesInit = useCallback(async (engine: Engine) => {  // <-- тип Engine здесь
-  }, []);
 
   const [index, setIndex] = useState(0);
   const [fade, setFade] = useState(true);
@@ -111,20 +66,6 @@ export default function Home() {
       <main>
         {/* Перший экран */}
         <section className="section first-section" style={{ position: "relative", overflow: "hidden" }}>
-          <Particles
-            id="tsparticles"
-            init={particlesInit}
-            options={particlesOptions}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              zIndex: 0,
-            }}
-          />
-
           <img
             src={photos[index]}
             alt={`Фото ${index + 1}`}
