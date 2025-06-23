@@ -36,11 +36,4 @@ export const ScrollRevealText = ({ children }: ScrollRevealTextProps) => {
       {children}
     </div>
   );
-  return (
-    useEffect(() => {
-  console.log("ref.current:", ref.current);
-  console.log("isVisible:", isVisible);
-}, [isVisible]);
-
-  )
 };
